@@ -1,0 +1,34 @@
+<div class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-12 col-md-6 text-center">
+      {% if producto.img_producto %}
+      <img
+        src="{{ producto.img_producto.url }}"
+        class="img-fluid rounded"
+        style="max-height: 350px; object-fit: contain"
+        alt="{{ producto.nombre_producto }}"
+      />
+      {% endif %}
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h2 class="mb-3">{{ producto.nombre_producto }}</h2>
+
+      <p class="text-muted">{{ producto.descripcion_producto }}</p>
+
+      <h4 class="fw-bold mb-4">$ {{ producto.precio_producto }}</h4>
+
+      <div class="d-flex gap-2">
+        <a
+          href="{% url 'agregar_carrito' producto.id %}"
+          class="btn btn-primary"
+          >🛒 Agregar al carrito</a
+        >
+
+        <a href="{% url 'tienda' %}" class="btn btn-outline-secondary">
+          ⬅ Volver
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

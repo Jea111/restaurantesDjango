@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finalizar compra</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container my-5">
+      <h2>Finalizar compra</h2>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Datos de contacto</h4>
+          <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">
+              Confirmar pedido
+            </button>
+            <a href="{% url 'ver_carrito' %}" class="btn btn-outline-secondary"
+              >Volver al carrito</a
+            >
+          </form>
+        </div>
+
+        <div class="col-md-6">
+          <h4>Resumen del pedido</h4>
+          {% if items %}
+          <ul class="list-group">
+            {% for it in items %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              {{ it.producto.nombre_producto }} x {{ it.cantidad }}
+              <span>$ {{ it.subtotal }}</span>
+            </li>
+            {% endfor %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <strong>Total</strong>
+              <strong>$ {{ total }}</strong>
+            </li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
