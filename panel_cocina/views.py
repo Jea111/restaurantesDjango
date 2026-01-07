@@ -18,3 +18,7 @@ def panel_cocina_view_pendientes(request):
         'ventas': ventas
     })
 
+
+def pedidos_confirmados(request):
+    pedidos_listos = Venta.objects.filter(estado='pagada')
+    return render (request,'pedidos_listos.html',{'pedidos_listos':pedidos_listos})

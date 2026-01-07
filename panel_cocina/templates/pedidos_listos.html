@@ -1,0 +1,12 @@
+<h3>Pedidos entregados</h3>
+{% for p in pedidos_listos %}
+
+<div>
+  <h3>{{p.nombre_cliente}}</h3>
+  <p>{{p.telefono}}</p>
+  <p>{{p.direccion}}</p>
+  <p>{{p.metodo_pago}}</p>
+  <p>{{p.total}}</p>
+</div>
+
+{% endfor %}
