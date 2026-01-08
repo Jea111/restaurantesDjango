@@ -26,14 +26,34 @@
           {% for it in items %}
           <tr>
             <td>{{ it.producto.nombre_producto }}</td>
-            <td>{{ it.cantidad }}</td>
+            <td>
+              <button class="btn btn-outline-dark btn-sm rounded-circle px-3">
+                <a
+                  href="{% url 'decrementar_producto_carrito' it.producto.id %}"
+                  class="text-decoration-none text-dark fw-bold"
+                >
+                  -
+                </a>
+              </button>
+
+              {{ it.cantidad }}
+
+              <button class="btn btn-outline-dark btn-sm rounded-circle px-3">
+                <a
+                  href="{% url 'incrementar_producto_carrito' it.producto.id %}"
+                  class="text-decoration-none text-dark fw-bold"
+                >
+                  +
+                </a>
+              </button>
+            </td>
             <td>$ {{ it.subtotal }}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
 
-      <h4>Total: $ {{ total }}</h4>
+      <h4>Total: $ <span id="cart-total">{{ total }}</span></h4>
 
       <a href="{% url 'finalizar_compra' %}" class="btn btn-success"
         >Finalizar compra</a
@@ -41,6 +61,11 @@
       <a href="{% url 'tienda' %}" class="btn btn-secondary"
         >Seguir comprando</a
       >
+
+      <template id="empty-cart-template">
+        <p>Tu carrito está vacío.</p>
+        <a href="{% url 'tienda' %}" class="btn btn-primary">Ir a la tienda</a>
+      </template>
 
       {% else %}
       <p>Tu carrito está vacío.</p>

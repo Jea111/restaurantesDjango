@@ -22,3 +22,14 @@ def panel_cocina_view_pendientes(request):
 def pedidos_confirmados(request):
     pedidos_listos = Venta.objects.filter(estado='pagada')
     return render (request,'pedidos_listos.html',{'pedidos_listos':pedidos_listos})
+
+
+def buscar_pedidos_usuario(request):
+    if request.method =='POST':
+        q = request.POST.get('q').strip()
+        usuario_encontrado =Venta.objects.filter(nombre_cliente=q)
+        return render(request,'detalle_usuario.html',{'detalle_usuario':usuario_encontrado,'busqueda':q})
+    else:
+        mensaje = 'No se encontraron ventas con ese nombre de usuario'
+        return render(request,'detalle_usuario.html',{'mensaje':mensaje})
+    
